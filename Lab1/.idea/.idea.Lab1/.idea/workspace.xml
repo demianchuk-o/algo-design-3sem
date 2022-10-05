@@ -7,17 +7,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7ece6836-9707-45f6-bf90-e284dea6d03a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Lab1/BasicMultiWayMerge.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lab1/Generator.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lab1/OptimisedMultiWayMerge.cs" afterDir="false" />
+    <list default="true" id="7ece6836-9707-45f6-bf90-e284dea6d03a" name="Changes" comment="already edited constants">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Lab1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Lab1/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lab1/Constants.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Lab1/Constants.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lab1/Generator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Lab1/Generator.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Lab1/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Lab1/Program.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="mock://D:/Labs/algo-design-3sem/Lab1/Lab1/Generator.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/Labs/algo-design-3sem/Lab1/Lab1/Generator.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/Labs/algo-design-3sem/Lab1/Lab1/Program.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -73,7 +77,7 @@
       <workItem from="1664828144746" duration="8592000" />
       <workItem from="1664838520821" duration="682000" />
       <workItem from="1664839458437" duration="619000" />
-      <workItem from="1664898055939" duration="14912000" />
+      <workItem from="1664898055939" duration="19330000" />
     </task>
     <task id="LOCAL-00001" summary="starting the work">
       <created>1664829840785</created>
@@ -89,7 +93,35 @@
       <option name="project" value="LOCAL" />
       <updated>1664838100135</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="added file generator">
+      <created>1664931249425</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1664931249426</updated>
+    </task>
+    <task id="LOCAL-00004" summary="organised classes (kinda)">
+      <created>1664931285112</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1664931285112</updated>
+    </task>
+    <task id="LOCAL-00005" summary="created basic constants class">
+      <created>1664934714989</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1664934714989</updated>
+    </task>
+    <task id="LOCAL-00006" summary="already edited constants">
+      <created>1664934811838</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1664934811838</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -112,7 +144,11 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="starting the work" />
     <MESSAGE value="coded some cringe" />
-    <option name="LAST_COMMIT_MESSAGE" value="coded some cringe" />
+    <MESSAGE value="added file generator" />
+    <MESSAGE value="organised classes (kinda)" />
+    <MESSAGE value="created basic constants class" />
+    <MESSAGE value="already edited constants" />
+    <option name="LAST_COMMIT_MESSAGE" value="already edited constants" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
