@@ -2,7 +2,7 @@
 
 public static class Constants
 {
-    public static readonly int Kb = 1024;
-    public static readonly int Mb = 1048576;
-    public static readonly int Gb = 1073741824;
+    public const int Kb = 1024;
+    public const int Mb = 1048576;
+    public const int Gb = 1073741824;
 }
