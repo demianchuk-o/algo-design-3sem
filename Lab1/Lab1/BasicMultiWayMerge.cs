@@ -1,6 +1,4 @@
-﻿using System.IO;
-
-namespace Lab1;
+﻿namespace Lab1;
 
 public class BasicMultiWayMerge
 {
@@ -20,39 +18,32 @@ public class BasicMultiWayMerge
         PreSortDistribution();
     }
 
-    private void EmptyHelpFiles()
-    {
-        
-    }
     private void PreSortDistribution()
     {
         using (BinaryReader readFileA = new BinaryReader(File.Open(initFilePath, FileMode.OpenOrCreate)))
         {
             int index = 0;
-            int offset = 0;
             byte[] buff = new byte[100 * Constants.Mb];
 
             long len = (totalIntegers * 4) / (100 * Constants.Mb);
             for (long j = 0; j < len; j++)
             {
-                readFileA.BaseStream.Seek((100 * Constants.Mb)*offset++, SeekOrigin.Begin);
+                readFileA.BaseStream.Seek((100 * Constants.Mb)*j, SeekOrigin.Begin);
                 buff = readFileA.ReadBytes(100 * Constants.Mb);
                 while (index <= buff.Length)
                 {
                     for (int k = 0; k < filesinArray; k++)
                     {
-                        //using (BinaryWriter writeFileB = new BinaryWriter(File.Open($"B{k}.dat", FileMode.OpenOrCreate)))
-                        using (BinaryWriter writeFileB = new BinaryWriter(File.Open($"B{k}.dat", File.Exists($"B{k}.dat") ? FileMode.Append : FileMode.OpenOrCreate )))
+                        using (BinaryWriter writeFileB = new BinaryWriter(File.Open($"B{k}.dat",FileMode.OpenOrCreate)))
                         {
                             int start = index;
                             int end = ReadSequence(buff, ref index);
                             writeFileB.Write(buff[start..end]);
+                            writeFileB.Close();
                         }
                     }
                 }
             }
-            
-            
         }
     }
 
