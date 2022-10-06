@@ -6,6 +6,7 @@ public static class Generator
     {
         using (BinaryWriter writer = new BinaryWriter(File.Open(filePath, FileMode.OpenOrCreate)))
         {
+            
             int portion = integersAmount switch
             {
                 < 10*Constants.Mb / sizeof(Int32) => 1000,
