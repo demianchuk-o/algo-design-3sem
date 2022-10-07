@@ -7,11 +7,11 @@ public static class Generator
         using (BinaryWriter writer = new BinaryWriter(File.Open(filePath, FileMode.OpenOrCreate)))
         {
             
-            int portion = integersAmount switch
+            int portion = (integersAmount * sizeof(Int32)) switch
             {
-                < 10*Constants.Mb / sizeof(Int32) => 1000,
-                (>= 10*Constants.Mb / sizeof(Int32)) and (< Constants.Gb / sizeof(Int32)) => 100000,
-                >= Constants.Gb / sizeof(Int32) => 100000000,
+                <= 10*Constants.Mb => 1000,
+                (> 10*Constants.Mb) and (< Constants.Gb) => 100000,
+                >= Constants.Gb => 100000000,
             };
 
             Random rng = new Random();
