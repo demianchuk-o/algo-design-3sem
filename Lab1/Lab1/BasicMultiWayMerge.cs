@@ -1,4 +1,6 @@
-﻿namespace Lab1;
+﻿using System.Diagnostics;
+
+namespace Lab1;
 
 public class BasicMultiWayMerge
 {
@@ -13,14 +15,31 @@ public class BasicMultiWayMerge
         filesinArray = mOfFiles;
         totalIntegers = integers;
         buffSize = GetBuffSize(integers);
+        CreateFiles();
     }
     
     private int GetBuffSize(long integers) => (integers * sizeof(Int32)) switch
     {
         <= 10*Constants.Mb => Constants.Mb,
-        (> 10*Constants.Mb) and (< Constants.Gb) => (int)(totalIntegers * sizeof(Int32) / 12),
+        (> 10*Constants.Mb) and (< Constants.Gb) => (int)(totalIntegers * sizeof(Int32) / 16),
         >= Constants.Gb => (100 * Constants.Mb),
-    }; 
+    };
+
+    private void CreateFiles()
+    {
+        for (int i = 0; i < filesinArray; i++)
+        {
+            if (!File.Exists($"B{i}.dat"))
+            {
+                File.Create($"B{i}.dat").Close();
+            }
+
+            if (!File.Exists($"C.{i}.dat"))
+            {
+                File.Create($"C{i}.dat").Close();
+            }
+        }
+    }
     
     public void Sort()
     {
@@ -31,27 +50,31 @@ public class BasicMultiWayMerge
     {
         using (BinaryReader readFileA = new BinaryReader(File.Open(initFilePath, FileMode.OpenOrCreate)))
         {
-            int index = 0;
-
-            byte[] buff = new byte[buffSize];
+            BinaryWriter[] bFileWriters = new BinaryWriter[filesinArray];
+            for (int i = 0; i < filesinArray; i++)
+            {
+                bFileWriters[i] = new BinaryWriter(new FileStream($"B{i}.dat", FileMode.Append, FileAccess.Write));
+            }
 
             long len = (totalIntegers * 4) / (buffSize);
             for (long j = 0; j < len; j++)
             {
-                readFileA.BaseStream.Seek(buffSize*j, SeekOrigin.Begin);
-                buff = readFileA.ReadBytes(buffSize);
+                byte[] buff = readFileA.ReadBytes(buffSize);
+                int index = 0;
                 while (index < buff.Length)
                 {
                     for (int k = 0; k < filesinArray; k++)
                     {
-                        using (BinaryWriter writeFileB = new BinaryWriter(File.Open($"B{k}.dat", File.Exists($"B{k}.dat") ? FileMode.Append : FileMode.OpenOrCreate)))
-                        {
-                            int start = index;
-                            int end = ReadSequence(ref buff, ref index);
-                            writeFileB.Write(buff[start..end]);
-                        }
+                        int start = index;
+                        int end = ReadSequence(ref buff, ref index);
+                        bFileWriters[k].Write(buff[start..end]);
                     }
                 }
+                
+            }
+            foreach (BinaryWriter bw in bFileWriters)
+            {
+                bw.Close();
             }
         }
     }
