@@ -8,11 +8,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7ece6836-9707-45f6-bf90-e284dea6d03a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Lab1/MinHeap.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Lab1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Lab1/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Lab1/BasicMultiWayMerge.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Lab1/BasicMultiWayMerge.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab1/Generator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Lab1/Generator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab1/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Lab1/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lab1/Lab1.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Lab1/Lab1.csproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,13 +25,16 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/20f935c617cb13b3b5d655ad5f42ba30fdd1df3715150c95fc449bd67a8f8/TlsOverPerCoreLockedStacksArrayPool.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/215ca8fd95391172a79e7562793d1c44d7ec8c3b6bb186f01251b947efd0f6a4/Index.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/228dc3749b539e3c9e25e39aef9ae46e8f91a982c59edd810118695e168978/FileStreamHelpers.Windows.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3d1c44ba24413bc137f8efbde7ad813edc04521991d91b6d2f5c2f2ce4cd/EncoderReplacementFallback.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/70d469ac9b54f196239efd36a749a1484ed95f9613bb3b9e96d22234d3b8482a/BufferedFileStreamStrategy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/732a3ff679450a837fc08eaccb7fabe4f5602b49befb51bc8369197e06bb6/Buffer.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/744c30a7462849eebaa8998e6fc518e3cc3a951f55a96722fcfb71c3196393b/Range.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/755315b85d697ce3a1d69b99582324fda62d65cab6f5cc845951656174aed892/RuntimeHelpers.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/7cb7424fd293afbd058d95c82aaf7b12b3cf57037576ecc8fd333ccfad7ad/Encoding.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/8c621265319434790edd98311cae0eebf4dc94ada4d80e116a1eea532ad9024/FileStream.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/9ff6e15065aca4366778dbe1a1b71b9164dea3534b71e1795c33fd6f159f52/RuntimeType.CoreCLR.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/a1a7d5df59fffc35741652c2b70a9f826d4629acc1a5da06291ef376a1dc4/ReadOnlySpan.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/a77cfdc71922b9c9fe68e6b34e5e98afd9f992f48887d6254d21aed7d5e64c/SerializationInfo.SerializationGuard.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/ad2a4b807aefd7738e919aa358fa13721e9a4848eb142d8849c2546109d81e1/RuntimeType.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/b0aa99cede65b1ac27f6e18b8da4cdb164b2e5e64026b6216c3b8e4ad456bd/OSFileStreamStrategy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/b34cda9bf13421d0d691446062e86e73ba22b7a724d9d34a2425bb1cc627e1/SR.cs" root0="SKIP_HIGHLIGHTING" />
@@ -50,6 +51,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/f3b9684f72bc2cc435eb694f7cc86eca8c240d2d1cefa1e8697a61f1f2f27f/SafeFileHandle.Windows.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/fd24584d19b30e71661e6cf1e2b72e725ac87c09096b9fcbf5f344bff357d/DefaultInterpolatedStringHandler.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/fd7e84c652acb74d1bb469c0db41fde874bfe844286f14882816f367e4e8e1/Type.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Lab1/MinHeap.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -115,7 +117,9 @@
       <workItem from="1665071847490" duration="12339000" />
       <workItem from="1665086577398" duration="3306000" />
       <workItem from="1665090967395" duration="6995000" />
-      <workItem from="1665135924268" duration="34300000" />
+      <workItem from="1665135924268" duration="34342000" />
+      <workItem from="1665185434242" duration="647000" />
+      <workItem from="1665243464594" duration="8234000" />
     </task>
     <task id="LOCAL-00001" summary="starting the work">
       <created>1664829840785</created>
@@ -180,7 +184,14 @@
       <option name="project" value="LOCAL" />
       <updated>1665088132261</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="hope this will work in the morning">
+      <created>1665183423125</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1665183423125</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -210,7 +221,8 @@
     <MESSAGE value="small changes" />
     <MESSAGE value="updating the work" />
     <MESSAGE value="making changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="making changes" />
+    <MESSAGE value="hope this will work in the morning" />
+    <option name="LAST_COMMIT_MESSAGE" value="hope this will work in the morning" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>
