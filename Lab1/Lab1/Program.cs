@@ -10,8 +10,8 @@ internal class Program
             Console.WriteLine();
             Console.Write("Enter the number of files (m): ");
             int mOffiles = Int32.Parse(Console.ReadLine());
-            Stopwatch sw = Stopwatch.StartNew();
             Generator.Generate(Constants.initFilePath, integersToGen);
+            Stopwatch sw = Stopwatch.StartNew();
             BasicMultiWayMerge mwm = new BasicMultiWayMerge(integersToGen, mOffiles);
             mwm.Sort();
             sw.Stop();
