@@ -7,10 +7,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7ece6836-9707-45f6-bf90-e284dea6d03a" name="Changes" comment="">
+    <list default="true" id="7ece6836-9707-45f6-bf90-e284dea6d03a" name="Changes" comment="basic algo done">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Lab1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Lab1/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab1/BasicMultiWayMerge.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Lab1/BasicMWayMerge.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab1/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Lab1/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lab1/BasicMWayMerge.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Lab1/BasicMWayMerge.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -121,7 +120,7 @@
       <workItem from="1665185434242" duration="647000" />
       <workItem from="1665243464594" duration="35706000" />
       <workItem from="1665311727667" duration="31344000" />
-      <workItem from="1665346990833" duration="3317000" />
+      <workItem from="1665346990833" duration="9368000" />
     </task>
     <task id="LOCAL-00001" summary="starting the work">
       <created>1664829840785</created>
@@ -214,7 +213,14 @@
       <option name="project" value="LOCAL" />
       <updated>1665279645377</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="basic algo done">
+      <created>1665396742605</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1665396742605</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -248,7 +254,8 @@
     <MESSAGE value="changed approach in work with files" />
     <MESSAGE value="removed redundant class" />
     <MESSAGE value=" finalizing basic algo (I hope)" />
-    <option name="LAST_COMMIT_MESSAGE" value=" finalizing basic algo (I hope)" />
+    <MESSAGE value="basic algo done" />
+    <option name="LAST_COMMIT_MESSAGE" value="basic algo done" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

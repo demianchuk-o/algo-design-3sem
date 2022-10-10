@@ -149,12 +149,7 @@ public class BasicMWayMerge
         {
             sourceFileReaders[j] = new BinaryReader(File.Open(String.Concat(sourceFiles, $"{j}.dat"), FileMode.Open));
         }
-
-        int[] positions = new int[activeFilesArrayLength];
-        for (int i = 0; i < activeFilesArrayLength; i++)
-        {
-            positions[i] = 0;
-        }
+        
 
         BinaryWriter[] destinationFileWriters = new BinaryWriter[filesinArray];
         for (int i = 0; i < filesinArray; i++)
