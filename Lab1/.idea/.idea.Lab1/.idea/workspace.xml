@@ -7,10 +7,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7ece6836-9707-45f6-bf90-e284dea6d03a" name="Changes" comment="basic algo done">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Lab1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Lab1/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab1/BasicMWayMerge.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Lab1/BasicMWayMerge.cs" afterDir="false" />
-    </list>
+    <list default="true" id="7ece6836-9707-45f6-bf90-e284dea6d03a" name="Changes" comment="added report for Lab1" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -51,6 +48,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/f3b9684f72bc2cc435eb694f7cc86eca8c240d2d1cefa1e8697a61f1f2f27f/SafeFileHandle.Windows.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/fd24584d19b30e71661e6cf1e2b72e725ac87c09096b9fcbf5f344bff357d/DefaultInterpolatedStringHandler.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/fd7e84c652acb74d1bb469c0db41fde874bfe844286f14882816f367e4e8e1/Type.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/Labs/algo-design-3sem/Lab1/Lab1/BasicMWayMerge.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -120,7 +118,7 @@
       <workItem from="1665185434242" duration="647000" />
       <workItem from="1665243464594" duration="35706000" />
       <workItem from="1665311727667" duration="31344000" />
-      <workItem from="1665346990833" duration="9368000" />
+      <workItem from="1665346990833" duration="9901000" />
     </task>
     <task id="LOCAL-00001" summary="starting the work">
       <created>1664829840785</created>
@@ -220,7 +218,21 @@
       <option name="project" value="LOCAL" />
       <updated>1665396742605</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="small change">
+      <created>1665405805893</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1665405805893</updated>
+    </task>
+    <task id="LOCAL-00016" summary="added report for Lab1">
+      <created>1665406151516</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1665406151516</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -255,7 +267,9 @@
     <MESSAGE value="removed redundant class" />
     <MESSAGE value=" finalizing basic algo (I hope)" />
     <MESSAGE value="basic algo done" />
-    <option name="LAST_COMMIT_MESSAGE" value="basic algo done" />
+    <MESSAGE value="small change" />
+    <MESSAGE value="added report for Lab1" />
+    <option name="LAST_COMMIT_MESSAGE" value="added report for Lab1" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>
