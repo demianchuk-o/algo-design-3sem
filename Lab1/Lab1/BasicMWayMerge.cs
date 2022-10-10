@@ -2,14 +2,14 @@
 
 namespace Lab1;
 
-public class BasicMultiWayMerge
+public class BasicMWayMerge
 {
-    private readonly string initFilePath;
+    public readonly string initFilePath;
     private readonly int filesinArray;
     private readonly long totalIntegers;
-    private readonly int buffSize;
+    private int buffSize;
 
-    public BasicMultiWayMerge(long integers ,int mOfFiles)
+    public BasicMWayMerge(long integers ,int mOfFiles)
     {
         initFilePath = Constants.initFilePath;
         filesinArray = mOfFiles;
@@ -20,9 +20,9 @@ public class BasicMultiWayMerge
     
     private int GetBuffSize(long integers) => (integers * sizeof(Int32)) switch
     {
-        <= 10*Constants.Mb => Constants.Mb,
-        (> 10*Constants.Mb) and (< Constants.Gb) => (int)(totalIntegers * sizeof(Int32) / 16),
-        >= Constants.Gb => (100 * Constants.Mb),
+        <= 10*Constants.Mb => 10 / filesinArray * Constants.Mb,
+        (> 10*Constants.Mb) and (< Constants.Gb) => 100 / filesinArray * Constants.Mb,
+        >= Constants.Gb => 500 / filesinArray * Constants.Mb,
     };
 
     private void CreateFiles()
@@ -70,9 +70,13 @@ public class BasicMultiWayMerge
 
             flag = !flag;
         }
+        FileInfo infoB = new FileInfo(String.Concat(Constants.bFiles, "0.dat"));
+        FileInfo infoC = new FileInfo(String.Concat(Constants.cFiles, "0.dat"));
+        string writtenFile = (infoB.Length > infoC.Length) ? "B0.dat" : "C0.dat";
+        File.Copy(writtenFile, initFilePath, true);
     }
 
-    private void PreSortDistribution()
+    private void PreSortDistribution()  
     {
         using (BinaryReader readFileA = new BinaryReader(File.Open(initFilePath, FileMode.OpenOrCreate)))
         {
@@ -120,10 +124,9 @@ public class BasicMultiWayMerge
 
     private bool SortIsDone()
     {
-        FileInfo infoA = new FileInfo(Constants.initFilePath);
         FileInfo infoB = new FileInfo(String.Concat(Constants.bFiles, "0.dat"));
         FileInfo infoC = new FileInfo(String.Concat(Constants.cFiles, "0.dat"));
-        return infoB.Length == infoA.Length || infoC.Length == infoA.Length;
+        return infoB.Length == (totalIntegers * 4) || infoC.Length == (totalIntegers * 4);
     }
 
     private void Merge(string sourceFiles, string destinationFiles)
@@ -159,10 +162,9 @@ public class BasicMultiWayMerge
             destinationFileWriters[i] = new BinaryWriter(File.Open(String.Concat(destinationFiles, $"{i}.dat"), FileMode.Append));
         }
 
+        int writeInto = 0;
         while (!ReadersAreMerged(sourceFileReaders))
         {
-            for (int i = 0; i < destinationFileWriters.Length; i++)
-            {
                 int readableFiles = 0;
                 foreach (BinaryReader reader in sourceFileReaders)
                 {
@@ -176,34 +178,34 @@ public class BasicMultiWayMerge
                 int[] pointers = new int[readableFiles];
                 for (int p = 0; p < readableFiles; p++)
                     pointers[p] = 0;
+                
                 int iter = 0;
                 for (int j = 0; j < activeFilesArrayLength; j++)
                 {
-                    if (!EndOfStream(sourceFileReaders[i]))
+                    if (!EndOfStream(sourceFileReaders[j]))
                     {
                         if (sourceFileReaders[j].BaseStream.Length - sourceFileReaders[j].BaseStream.Position >= buffSize)
                         {
-                            //buffer[iter] = new byte[buffSize];
                             buffer[iter++] = sourceFileReaders[j].ReadBytes(buffSize);
                         }
                         else
                         {
-                            //buffer[iter] = new byte[(int)(sourceFileReaders[j].BaseStream.Length -
-                                                          //sourceFileReaders[j].BaseStream.Position)];
-                            buffer[iter++] = sourceFileReaders[j]
-                                .ReadBytes((int)(sourceFileReaders[j].BaseStream.Length -
+                            buffer[iter++] = sourceFileReaders[j].ReadBytes((int)(sourceFileReaders[j].BaseStream.Length -
                                                  sourceFileReaders[j].BaseStream.Position));
                         }
                     }
                 }
 
+                int? lastOfPrevSeries = null;
                 while (!BufferIsAllRead(ref buffer, ref pointers))
                 {
                     int readableBuffers = 0;
                     for (int k = 0; k < buffer.Length; k++)
                     {
-                        if(pointers[k] < buffer[k].Length)
+                        if (pointers[k] < buffer[k].Length)
+                        {
                             readableBuffers++;
+                        }
                     }
                     int[][] activeSequences = new int[readableBuffers][];
                     int ASIter = 0; 
@@ -222,14 +224,25 @@ public class BasicMultiWayMerge
                     int[] mergedSequence = new int[ASLength];
                     MergeSequences(ref activeSequences, ref mergedSequence);
 
+                    if (lastOfPrevSeries.HasValue)
+                    {
+                        if (lastOfPrevSeries > mergedSequence[0])
+                        {
+                            writeInto = (writeInto + 1) % destinationFileWriters.Length;
+                        }
+                    }
                     for (int m = 0; m < mergedSequence.Length; m++)
                     {
-                        destinationFileWriters[i].Write(mergedSequence[m]);
+                        destinationFileWriters[writeInto].Write(mergedSequence[m]);
                     }
+
+                    lastOfPrevSeries = mergedSequence[^1];
                 }
 
-            }
-            
+                if (sourceFileReaders[0].BaseStream.Length / buffSize > 1.5)
+                {
+                    buffSize = (int)sourceFileReaders[0].BaseStream.Length;
+                }
         }
 
         foreach (var reader in sourceFileReaders)
@@ -291,6 +304,7 @@ public class BasicMultiWayMerge
             {
                 flag = false;
             }
+            
         }
 
         return flag;
@@ -344,5 +358,26 @@ public class BasicMultiWayMerge
         }
 
         return index;
+    }
+
+    public bool CheckIfSorted()
+    {
+        using (BinaryReader reader = new BinaryReader(new FileStream(Constants.initFilePath, FileMode.Open)))
+        {
+            int prev = reader.ReadInt32();
+            while (!EndOfStream(reader))
+            {
+                int temp = reader.ReadInt32();
+                if (temp >= prev)
+                {
+                    prev = temp;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 }

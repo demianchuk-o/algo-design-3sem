@@ -12,12 +12,16 @@ internal class Program
             int mOffiles = Int32.Parse(Console.ReadLine());
             Generator.Generate(Constants.initFilePath, integersToGen);
             Stopwatch sw = Stopwatch.StartNew();
-            BasicMultiWayMerge mwm = new BasicMultiWayMerge(integersToGen, mOffiles);
+            BasicMWayMerge mwm = new BasicMWayMerge(integersToGen, mOffiles);
             mwm.Sort();
             sw.Stop();
             Console.WriteLine($"Done in {sw.ElapsedMilliseconds}");
-            
+            Console.WriteLine($"Sorted data is stored in {mwm.initFilePath}");
+            Console.Write("Do you want to check if file is sorted? [Y/N]? ");
+            string? answer = Console.ReadLine();
+            if (answer.Contains("Y"))
+            {
+                Console.WriteLine(mwm.CheckIfSorted());
+            }
         }
-        
-       
     }
