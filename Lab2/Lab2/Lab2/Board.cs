@@ -47,8 +47,15 @@ internal class Board
 
     public void DrawBoard()
     {
+        Console.Write("   ");
+        for (int i = 0; i < 8; i++)
+        {
+            Console.Write($" {i} ");
+        }
+        Console.WriteLine();
         for (int i = 0; i < field.Length; i++)
         {
+            Console.Write($" {i} ");
             for (int j = 0; j < field[i].Length; j++)
             {
                 if (field[i][j])
@@ -90,23 +97,13 @@ internal class Board
                     }
                     //LT-RB search
                     int delta = j - i;
-                    int start = (delta >= 0) ? 0 : delta;
+                    int start = (delta >= 0) ? 0 : -delta;
                     int end = (delta >= 0) ? 7 - delta : 7;
                     for (int k = start; k <= end; k++)
                     {
-                        if (delta >= 0)
+                        if (field[k][k + delta] && k != i && k + delta != j)
                         {
-                            if (field[k][k + delta] && k != i && k + delta != j)
-                            {
-                                Console.WriteLine($"{i}, {j} conflicts with {k}, {k+delta}");
-                            }
-                        }
-                        else
-                        {
-                            if (field[k][k - delta] && k != i && k - delta != j)
-                            {
-                                Console.WriteLine($"{i}, {j} conflicts with {k}, {k+delta}");
-                            }
+                            Console.WriteLine($"{i}, {j} conflicts with {k}, {k+delta}");
                         }
                     }
                     
@@ -117,12 +114,24 @@ internal class Board
                     for (int k = start; k >= end; k--)
                     {
                         if (field[k][delta - k] && k != i && delta - k != j)
-                            {
-                                Console.WriteLine($"{i}, {j} conflicts with {k}, {delta - k}");
-                            }
+                        {
+                            Console.WriteLine($"{i}, {j} conflicts with {k}, {delta - k}");
                         }
+                    }
                 }
             }
         }
     }
+
+    public int CountConflicts()
+    {
+        int conflicts = 0;
+        
+        return conflicts;
+
+        int CountHorizontal()
+        {
+            return 0;
+        }
+}
 }
