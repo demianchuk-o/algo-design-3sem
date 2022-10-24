@@ -6,10 +6,13 @@ internal class Program
     {
         try
         {
-            Board brd = new Board();
+            Console.Write("Enter the size of board: ");
+            int size = Int32.Parse(Console.ReadLine());
+            Console.WriteLine();
+            Board brd = new Board(size);
             int x, y;
             int queens = 0;
-            while(queens < 8)
+            while(queens < brd.size)
             {
                 Console.Write($"Place the {queens+1} Queen: ");
                 Console.Write("\tX: ");
@@ -23,12 +26,13 @@ internal class Program
                 }
                 else
                 {
-                    Console.WriteLine("You can't put another Queen here!");
+                    Console.WriteLine("You can't put Queen here!");
                 }
             }
             Console.WriteLine("Your board:");
             brd.DrawBoard();
-            brd.FindConflicts();
+            int conflicts = brd.CountConflicts();
+            Console.WriteLine($"Found {conflicts} conclicts");
         }
         catch (Exception e)
         {
