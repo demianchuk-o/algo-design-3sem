@@ -1,8 +1,6 @@
-﻿using Microsoft.VisualBasic.CompilerServices;
+﻿namespace Lab2;
 
-namespace Lab2;
-
-internal class Board
+public class Board
 {
     private bool[][] field;
     private int counter;
@@ -21,10 +19,10 @@ internal class Board
             field[i] = new bool[size];
         }
     }
-
-    public Board(ref Board other)
+    
+    public Board(int otherSize, Board other)
     {
-        size = other.size;
+        size = otherSize;
         counter = other.counter;
         field = new bool[size][];
         for (int i = 0; i < size; i++)
@@ -34,6 +32,7 @@ internal class Board
         }
     }
 
+    public bool GetFieldTile(int x, int y) => field[x][y];
     public bool AddQueen(int row, int col)
     {
         if (row < 0 || row > size - 1 || col < 0 || col > size - 1)
@@ -59,30 +58,33 @@ internal class Board
 
         return false;
     }
-    public void DrawBoard()
+    public override string ToString()
     {
-        Console.Write("   ");
+        string board = String.Empty;
+        board += "   ";
         for (int i = 0; i < size; i++)
         {
-            Console.Write($" {i} ");
+            board += $" {i} ";
         }
-        Console.WriteLine();
+        board += "\n";
         for (int i = 0; i < size; i++)
         {
-            Console.Write($" {i} ");
+            board += $" {i} ";
             for (int j = 0; j < size; j++)
             {
                 if (field[i][j])
                 {
-                    Console.Write("[Q]");
+                    board += "[Q]";
                 }
                 else
                 {
-                    Console.Write("[ ]");
+                    board += "[ ]";
                 }
             }
-            Console.WriteLine();
+            board += "\n";
         }
+
+        return board;
     }
 
     public int CountConflicts()

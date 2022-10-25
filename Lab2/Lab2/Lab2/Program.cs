@@ -6,6 +6,7 @@ internal class Program
     {
         try
         {
+            Console.WriteLine();
             Console.Write("Enter the size of board: ");
             int size = Int32.Parse(Console.ReadLine());
             Console.WriteLine();
@@ -30,9 +31,22 @@ internal class Program
                 }
             }
             Console.WriteLine("Your board:");
-            brd.DrawBoard();
+            Console.WriteLine(brd);
             int conflicts = brd.CountConflicts();
             Console.WriteLine($"Found {conflicts} conclicts");
+
+            Node root = new Node(brd);
+            LDFS ldfs = new LDFS(root, size);
+            Console.WriteLine(ldfs);
+            // Console.WriteLine("Generated root node for this board: ");
+            // Node root = new Node(brd);
+            // Node.Expand(root);
+            // int num = 0;
+            // foreach (var node in root.successors)
+            // {
+            //     Console.WriteLine($"{num++}");
+            //     node.state.DrawBoard();                
+            // }
         }
         catch (Exception e)
         {
