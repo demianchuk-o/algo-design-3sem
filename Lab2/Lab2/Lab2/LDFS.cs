@@ -2,7 +2,6 @@
 
 public class LDFS
 {
-    // private Node Root;
     private Tuple<Node?, Status> solution { get; set; }
 
     public LDFS(Node node, int lim)
@@ -28,7 +27,7 @@ public class LDFS
     private static Tuple<Node?, Status> RecursiveDLS(Node node, Status status, int lim)
     {
         bool cutoffOccured = false;
-        if (node.state.CountConflicts() == 0)
+        if (node.state.CountConfs() == 0)
             return new Tuple<Node?, Status>(node, Status.SUCCESS);
         if (node.depth == lim)
             return new Tuple<Node?, Status>(null, Status.CUTOFF);

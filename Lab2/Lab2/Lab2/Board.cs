@@ -2,77 +2,45 @@
 
 public class Board
 {
-    private bool[][] field;
-    private int counter;
-    public int size { get; init; }
+    private byte[] field;
     public Board(int _size = 8)
     {
         if (_size < 4 || _size > 100)
         {
             throw new ArgumentException();
         }
-        size = _size;
-        counter = 0;
-        field = new bool[size][];
-        for (int i = 0; i < size; i++)
+        field = new byte[_size];
+        Random rng = new Random();
+        for (int i = 0; i < _size; i++)
         {
-            field[i] = new bool[size];
+            field[i] = (byte)rng.Next(0, _size);
         }
     }
     
     public Board(int otherSize, Board other)
     {
-        size = otherSize;
-        counter = other.counter;
-        field = new bool[size][];
-        for (int i = 0; i < size; i++)
-        {
-            field[i] = new bool[size];
-            Array.Copy(other.field[i], field[i], size);
-        }
+        field = new byte[other.field.Length];
+        Array.Copy(other.field, field, other.field.Length);
     }
 
-    public bool GetFieldTile(int x, int y) => field[x][y];
-    public bool AddQueen(int row, int col)
-    {
-        if (row < 0 || row > size - 1 || col < 0 || col > size - 1)
-            throw new ArgumentOutOfRangeException();
-        if (counter > size)
-            throw new OverflowException();
-        if (ColContainsQueens(col))
-            return false;
-        if (field[row][col])
-            return false;
+    public int GetSize() => field.Length;
+    public byte GetRow(int col) => field[col];
 
-        field[row][col] = true;
-        counter++;
-        return true;
-    }
-
-    private bool ColContainsQueens(int col)
-    {
-        for (int i = 0; i < size; i++)
-        {
-            if (field[i][col]) return true;
-        }
-
-        return false;
-    }
     public override string ToString()
     {
         string board = String.Empty;
         board += "   ";
-        for (int i = 0; i < size; i++)
+        for (int i = 0; i < field.Length; i++)
         {
             board += $" {i} ";
         }
         board += "\n";
-        for (int i = 0; i < size; i++)
+        for (int i = 0; i < field.Length; i++)
         {
             board += $" {i} ";
-            for (int j = 0; j < size; j++)
+            for (int j = 0; j < field.Length; j++)
             {
-                if (field[i][j])
+                if (i == field[j])
                 {
                     board += "[Q]";
                 }
@@ -86,93 +54,48 @@ public class Board
 
         return board;
     }
-
-    public int CountConflicts()
+    
+    public int CountConfs()
     {
-        int conflicts = 0;
-        for (int i = 0; i < size; i++)
+        int res = 0;
+        for (int i = 0; i < field.Length; i++)
         {
-            conflicts += Horizontal(i);
-            conflicts += Vertical(i);
+            bool foundOnRow = false;
+            bool foundOnMainDiag = false;
+            bool foundOnSideDiag = false;
+            for (int a = i+1; a < field.Length; a++)
+            {
+                if (!foundOnRow && field[i] == field[a])
+                {
+                    foundOnRow = true;
+                    res++;
+                }
+
+                if (!foundOnMainDiag && i - field[i] == a - field[a])
+                {
+                    foundOnMainDiag = true;
+                    res++;
+                }
+
+                if (!foundOnSideDiag && i + field[i] == a + field[a])
+                {
+                    foundOnSideDiag = true;
+                    res++;
+                }
+            }
         }
 
-        for (int i = 0; i < size - 1; i++)
-        {
-            conflicts += LeftTopRightBottom(0, i);
-        }
-
-        for (int i = 1; i < size - 1; i++)
-        {
-            conflicts += LeftTopRightBottom(i, 0);
-        }
-
-        for (int i = 1; i < size - 1; i++)
-        {
-            conflicts += LeftBottomRightTop(i, 0);
-        }
-
-        for (int i = 1; i < size - 1; i++)
-        {
-            conflicts += LeftBottomRightTop(size - 1, i);
-        }
-        return conflicts;
+        return res;
     }
 
-    private int Horizontal(int row)
+    public void MoveQueen(int col, byte destination)
     {
-        int result = -1;
-        for (int i = 0; i < size; i++)
-        {
-            if (field[row][i]) result++;
-        }
-
-        return (result < 0) ? 0 : result;
-    }
-
-    private int Vertical(int col)
-    {
-        int result = -1;
-        for (int i = 0; i < size; i++)
-        {
-            if (field[i][col]) result++;
-        }
-
-        return (result < 0) ? 0 : result;
-    }
-
-    private int LeftTopRightBottom(int row, int col)
-    {
-        int result = -1;
-        while (row < size && col < size)
-        {
-            if (field[row++][col++]) result++;
-        }
-        
-        return (result < 0) ? 0 : result;
-    }
-
-    private int LeftBottomRightTop(int row, int col)
-    {
-        int result = -1;
-        while (row >= 0 && col < size)
-        {
-            if (field[row--][col++]) result++;
-        }
-
-        return (result < 0) ? 0 : result;
-    }
-
-    public void MoveQueen(int row, int col, int destination)
-    {
-        if (!field[row][col])
-            throw new Exception("No Queen at specified position");
-        if (destination < 0 || destination > size - 1)
+        if (destination > field.Length - 1)
             throw new IndexOutOfRangeException();
-        if (destination == col) 
+        if (destination == field[col]) 
             return;
 
-        field[row][col] = false;
-        field[destination][col] = true;
+        field[col] = destination;
     }
 }
 

@@ -15,12 +15,12 @@ public class Node
         depth = 0;
     }
     
-    public Node(ref Node parentNode, int queenX, int queenY, int dest)
+    public Node(ref Node parentNode, int queenY, byte dest)
     {
         parent = parentNode;
         depth = parentNode.depth + 1;
-        state = new Board(parentNode.state.size, parentNode.state);
-        state.MoveQueen(queenX, queenY, dest);
+        state = new Board(parentNode.state.GetSize(), parentNode.state);
+        state.MoveQueen(queenY, dest);
     }
 
     public override string ToString()
@@ -31,23 +31,13 @@ public class Node
     public static void Expand(Node node)
     {
         int index = 0;
-        node.successors = new Node[node.state.size * (node.state.size - 1)];
-        for (int col = 0; col < node.state.size; col++)        
+        node.successors = new Node[node.state.GetSize() * (node.state.GetSize() - 1)];
+        for (int i = 0; i < node.state.GetSize(); i++)
         {
-            for (int row = 0; row < node.state.size; row++)
+            for (byte j = 0; j < node.state.GetSize(); j++)
             {
-                if (node.state.GetFieldTile(row, col))
-                {
-                    for (int y = 0; y < node.state.size; y++)
-                    {
-                        if (y == row)
-                        {
-                            continue;
-                        }
-
-                        node.successors[index++] = new Node(ref node, row, col, y);
-                    }
-                }
+                if(node.state.GetRow(i) == j) continue;
+                node.successors[index++] = new Node(ref node, i, j);
             }
         }
     }
