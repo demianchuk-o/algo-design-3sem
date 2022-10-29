@@ -6,4 +6,5 @@ public enum Status
     SUCCESS,
     CUTOFF,
     FAILURE,
+    TIME_EXCEEDED,
 }

@@ -2,44 +2,47 @@
 
 public class Node
 {
-    private Node parent;
+    private Node? parent;
 
-    public Board state { get; }
-    public int depth { get; init; }
-    public Node[] successors { get; set; }
+    public Board State { get; }
+    public int Depth { get; }
+    public Node[] Successors { get; set; }
+    
+    internal int Cost() => Depth + State.CountConfs();
     
     public Node(Board InitialState)
     {
         parent = null;
-        state = InitialState;
-        depth = 0;
+        State = InitialState;
+        Depth = 0;
     }
     
     public Node(ref Node parentNode, int queenY, byte dest)
     {
         parent = parentNode;
-        depth = parentNode.depth + 1;
-        state = new Board(parentNode.state.GetSize(), parentNode.state);
-        state.MoveQueen(queenY, dest);
+        Depth = parentNode.Depth + 1;
+        State = new Board(parentNode.State.GetSize(), parentNode.State);
+        State.MoveQueen(queenY, dest);
     }
 
     public override string ToString()
     {
-        return state.ToString();
+        return State.ToString();
     }
 
     public static void Expand(Node node)
     {
         int index = 0;
-        node.successors = new Node[node.state.GetSize() * (node.state.GetSize() - 1)];
-        for (int i = 0; i < node.state.GetSize(); i++)
+        node.Successors = new Node[node.State.GetSize() * (node.State.GetSize() - 1)];
+        for (int i = 0; i < node.State.GetSize(); i++)
         {
-            for (byte j = 0; j < node.state.GetSize(); j++)
+            for (byte j = 0; j < node.State.GetSize(); j++)
             {
-                if(node.state.GetRow(i) == j) continue;
-                node.successors[index++] = new Node(ref node, i, j);
+                if(node.State.GetRow(i) == j) continue;
+                node.Successors[index++] = new Node(ref node, i, j);
             }
         }
     }
 
+    
 }

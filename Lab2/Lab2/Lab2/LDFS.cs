@@ -2,50 +2,83 @@
 
 public class LDFS
 {
-    private Tuple<Node?, Status> solution { get; set; }
-
-    public LDFS(Node node, int lim)
+    private StatsHandler _statsHandler;
+    private HashSet<Board> TotalStates;
+    private HashSet<Board> StatesInMemory;
+    public LDFS(Node node, int lim, bool choice)
     {
-        solution = DepthLimitedSearch(node, Status.SOLVING, lim);
+        TotalStates = new HashSet<Board>();
+        StatesInMemory = new HashSet<Board>();
+        _statsHandler = new StatsHandler(choice);
+        _statsHandler.Stopwatch.Start();
+        _statsHandler.Solution = DepthLimitedSearch(node, Status.SOLVING, lim);
+        _statsHandler.Stopwatch.Stop();
+        _statsHandler.StatesInMemory = StatesInMemory.Count;
+        _statsHandler.TotalStates = TotalStates.Count;
     }
 
-    public override string ToString()
-    {
-        return solution.Item2 switch
-        {
-            Status.SUCCESS => "Solution found successfully!\n" + solution.Item1,
-            Status.CUTOFF => "The search was cut off.",
-            Status.FAILURE => "The search has failed :(",
-        };
-    }
+    
 
-    private static Tuple<Node?, Status> DepthLimitedSearch(Node node, Status status, int lim)
+    private Tuple<Node?, Status> DepthLimitedSearch(Node node, Status status, int lim)
     {
-        return RecursiveDLS(node, Status.SOLVING ,lim);
+        return RecursiveDLS(node, Status.SOLVING, lim);
     }
     
-    private static Tuple<Node?, Status> RecursiveDLS(Node node, Status status, int lim)
+    private Tuple<Node?, Status> RecursiveDLS(Node node, Status status, int lim)
     {
-        bool cutoffOccured = false;
-        if (node.state.CountConfs() == 0)
-            return new Tuple<Node?, Status>(node, Status.SUCCESS);
-        if (node.depth == lim)
-            return new Tuple<Node?, Status>(null, Status.CUTOFF);
-        Node.Expand(node);
-        foreach (var successor in node.successors)
+        ++_statsHandler.Iterations;
+        if (_statsHandler.CheckLimits)
         {
+            if (_statsHandler.Stopwatch.ElapsedMilliseconds >= 1800000)
+            {
+                ++_statsHandler.DeadEnds;
+                return new Tuple<Node?, Status>(null, Status.TIME_EXCEEDED);
+            }
+        }
+        bool cutoffOccured = false;
+        if (node.State.CountConfs() == 0)
+            return new Tuple<Node?, Status>(node, Status.SUCCESS);
+        if (node.Depth == lim)
+        {
+            ++_statsHandler.DeadEnds;
+            return new Tuple<Node?, Status>(null, Status.CUTOFF);
+        }
+        TotalStates.Add(node.State);
+        Node.Expand(node);
+        foreach (var successor in node.Successors)
+        {
+            TotalStates.Add(successor.State);
             Tuple<Node?, Status> result = RecursiveDLS(successor, Status.SOLVING, lim);
-            if (result.Item2 == Status.CUTOFF)
-                cutoffOccured = true;
-            else if (result.Item2 != Status.FAILURE)
+            if (result.Item2 == Status.TIME_EXCEEDED)
+            {
                 return result;
+            }
+            if (result.Item2 == Status.CUTOFF)
+            {
+                cutoffOccured = true;
+                
+            }
+
+            else if (result.Item2 != Status.FAILURE)
+            {
+                foreach (var _successor in node.Successors)
+                {
+                    StatesInMemory.Add(_successor.State);
+                }
+                return result;
+            }
         }
 
         if (cutoffOccured)
-            return new Tuple<Node?, Status>(null, Status.CUTOFF);
-        else
         {
-            return new Tuple<Node?, Status>(null, Status.FAILURE);
+            return new Tuple<Node?, Status>(null, Status.CUTOFF);
         }
+        
+        return new Tuple<Node?, Status>(null, Status.FAILURE);
+    }
+
+    public string DisplayResults()
+    {
+        return _statsHandler.Results() + _statsHandler.Stats();
     }
 }

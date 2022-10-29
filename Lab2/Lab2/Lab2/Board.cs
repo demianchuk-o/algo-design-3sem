@@ -29,6 +29,12 @@ public class Board
     public override string ToString()
     {
         string board = String.Empty;
+        foreach (var tile in field)
+        {
+            board += $"{tile} ";
+        }
+
+        board += "\n";
         board += "   ";
         for (int i = 0; i < field.Length; i++)
         {
