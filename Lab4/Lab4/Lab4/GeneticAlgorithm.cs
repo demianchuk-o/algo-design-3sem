@@ -20,7 +20,7 @@ public class GeneticAlgorithm
     public void Start(int iterations)
     {
         SetStartPopulation();
-        int bestItemIndex = GetBestItemIndex();
+        int bestItemIndex = 0;
         int itr = 0;
         int best = 0;
         while (itr < iterations)
@@ -43,8 +43,13 @@ public class GeneticAlgorithm
                 if(GetTotalWeight(mutant) <= _capacity)
                     Array.Copy(mutant, successor, _chromosomeSize);
             }
-            if(successor[bestItemIndex] == false) 
-                successor[bestItemIndex] = !successor[bestItemIndex];
+
+            bestItemIndex = GetBestItemIndex(successor);
+            //if(successor[bestItemIndex] == false)
+            //    successor[bestItemIndex] = !successor[bestItemIndex];
+            successor[bestItemIndex] = !successor[bestItemIndex];
+
+            
             
             if(GetTotalWeight(successor) <= _capacity)
                 Array.Copy(successor, _population[worst], _chromosomeSize);
@@ -80,7 +85,7 @@ public class GeneticAlgorithm
 
         for (int i = 0; i < _chromosomeSize; i++)
         {
-            if (_population[best][i] == true)
+            if (_population[best][i])
             {
                 bestValue += _store.Items[i].Item1;
             }
@@ -115,7 +120,7 @@ public class GeneticAlgorithm
             int totalValue = 0;
             for (int j = 0; j < _chromosomeSize; j++)
             {
-                if(_population[i][j] == true)
+                if(_population[i][j])
                 {
                     totalValue += _store.Items[j].Item1;
                 }
@@ -178,26 +183,21 @@ public class GeneticAlgorithm
         return totalWeight;
     }
 
-    private int GetBestItemIndex()
+    private int GetBestItemIndex(bool[] chromosome)
     {
         int index = 0;
-        int bestValue = 0;
-        int minWeight = Store.WEIGHT_UPPER;
-        for (int i = 0; i < Store.AMT_OF_ITEMS; i++)
-        {
-            if (minWeight > _store.Items[i].Item2)
-                minWeight = _store.Items[i].Item2;
-        }
+        double bestValue = 0d;
 
         for (int i = 0; i < Store.AMT_OF_ITEMS; i++)
         {
-            if (_store.Items[i].Item2 == minWeight && bestValue < _store.Items[i].Item1)
+            double possibleVal = (double)_store.Items[i].Item1 / _store.Items[i].Item2;
+            if (!chromosome[i] && bestValue < possibleVal)
             {
-                bestValue = _store.Items[i].Item1;
+                bestValue = possibleVal;
                 index = i;
             }
         }
-
+        
         return index;
     }
     
