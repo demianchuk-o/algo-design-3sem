@@ -44,8 +44,8 @@ public class GeneticAlgorithm
             }
 
             successor[0] = !successor[0];
-            
-            Array.Copy(successor, _population[worst], _chromosomeSize);
+            if(GetTotalWeight(successor) <= _capacity)
+                Array.Copy(successor, _population[worst], _chromosomeSize);
         }
         Console.WriteLine("Item store:");
         Console.Write("Value:\t");
