@@ -20,6 +20,7 @@ public class GeneticAlgorithm
     public void Start(int iterations)
     {
         SetStartPopulation();
+        int bestItemIndex = GetBestItemIndex();
         int itr = 0;
         int best = 0;
         while (itr < iterations)
@@ -42,8 +43,9 @@ public class GeneticAlgorithm
                 if(GetTotalWeight(mutant) <= _capacity)
                     Array.Copy(mutant, successor, _chromosomeSize);
             }
-
-            successor[0] = !successor[0];
+            if(successor[bestItemIndex] == false) 
+                successor[bestItemIndex] = !successor[bestItemIndex];
+            
             if(GetTotalWeight(successor) <= _capacity)
                 Array.Copy(successor, _population[worst], _chromosomeSize);
         }
@@ -174,6 +176,29 @@ public class GeneticAlgorithm
         }
 
         return totalWeight;
+    }
+
+    private int GetBestItemIndex()
+    {
+        int index = 0;
+        int bestValue = 0;
+        int minWeight = Store.WEIGHT_UPPER;
+        for (int i = 0; i < Store.AMT_OF_ITEMS; i++)
+        {
+            if (minWeight > _store.Items[i].Item2)
+                minWeight = _store.Items[i].Item2;
+        }
+
+        for (int i = 0; i < Store.AMT_OF_ITEMS; i++)
+        {
+            if (_store.Items[i].Item2 == minWeight && bestValue < _store.Items[i].Item1)
+            {
+                bestValue = _store.Items[i].Item1;
+                index = i;
+            }
+        }
+
+        return index;
     }
     
 }
