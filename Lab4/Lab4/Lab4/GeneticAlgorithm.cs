@@ -58,8 +58,13 @@ public class GeneticAlgorithm
         {
             Console.Write($"{_store.Items[i].Item2} ");
         }
-        
-        
+
+        PrintResults(iterations, best);
+
+    }
+
+    private void PrintResults(int iterations, int best)
+    {
         Console.WriteLine($"\nThe best chromosome found in {iterations} iterations: ");
         int toNum = -1;
         for (int i = 0; i < _chromosomeSize; i++)
