@@ -45,11 +45,7 @@ public class GeneticAlgorithm
             }
 
             bestItemIndex = GetBestItemIndex(successor);
-            //if(successor[bestItemIndex] == false)
-            //    successor[bestItemIndex] = !successor[bestItemIndex];
             successor[bestItemIndex] = !successor[bestItemIndex];
-
-            
             
             if(GetTotalWeight(successor) <= _capacity)
                 Array.Copy(successor, _population[worst], _chromosomeSize);
