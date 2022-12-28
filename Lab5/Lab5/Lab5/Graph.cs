@@ -2,8 +2,8 @@
 
 public class Graph
 {
+    private static string path = "graph.txt";
     public static int _amtOfVertices = 300;
-    public static int _verticeDegreeMax = 30;
     public static int _minDistance = 5;
     public static int _maxDistance = 150;
     public int[,] DistanceMatrix { get; }
@@ -11,31 +11,30 @@ public class Graph
     public Graph()
     {
         DistanceMatrix = new int[_amtOfVertices, _amtOfVertices];
-            
-        Random rng = new Random();
-        int edges;
-        for (int i = 0; i < _amtOfVertices; i++)
+        for (int k = 0; k < _amtOfVertices; k++)
         {
-            edges = 0;
-            for (int j = i; j < _amtOfVertices; j++)
+            for (int l = 0; l < _amtOfVertices; l++)
             {
-                if (j == i) DistanceMatrix[i,j] = int.MaxValue;
-                else if (edges <= _verticeDegreeMax)
-                {
-                    if (rng.Next(_amtOfVertices) < _verticeDegreeMax)
-                    {
-                        DistanceMatrix[i,j] = rng.Next(_minDistance, _maxDistance + 1);
-                        DistanceMatrix[j,i] = DistanceMatrix[i,j];
-                        edges++;
-                    }
-                    else
-                    {
-                        DistanceMatrix[i,j] = -1;
-                        DistanceMatrix[j,i] = -1;
-                    }
-                }
+                DistanceMatrix[k, l] = -1;
             }
+            DistanceMatrix[k, k] = 0;
         }
+        int i = 0;
+        int j = 0;
+        int weight = 0;
+        StreamReader reader = new StreamReader(path);
+        string? line = reader.ReadLine();
+        while (line != null)
+        {
+            string[] split = line.Split(',');
+            i = Int32.Parse(split[0]);
+            weight = Int32.Parse(split[1]);
+            j = Int32.Parse(split[2]);
+            DistanceMatrix[i, j] = weight;
+            DistanceMatrix[j, i] = weight;
+            line = reader.ReadLine();
+        }
+        reader.Dispose();
     }
 
     public List<int> GetAdjacentVertices(int vertice)
