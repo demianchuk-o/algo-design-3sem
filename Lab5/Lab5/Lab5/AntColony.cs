@@ -72,7 +72,6 @@ public class AntColony
             {
                 AllTimeBestDistance = bestDistance;
                 AllTimeBestPath = bestPath;
-                if(AllTimeBestDistance <= Lmin) return;
             }
             PlacePheromones();
             
