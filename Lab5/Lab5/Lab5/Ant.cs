@@ -4,11 +4,11 @@ namespace Lab5;
 
 public abstract class Ant
 {
-    public int[] _path { get; private set; }
+    public int[] _path { get; }
     public int _currentLength;
     public int _pathDistance;
     public abstract int pheromoneCoeff { get; }
-    public double[] pheromones { get; private set; }
+    public double[] pheromones { get; }
 
     public Ant()
     {
@@ -42,14 +42,14 @@ public abstract class Ant
     protected void MoveToVertice(AntColony antColony, List<int> adjacents, int chosenVertice)
     {
         _path[_currentLength++] = adjacents[chosenVertice];
-        _pathDistance += antColony.graph.DistanceMatrix[_path[_currentLength - 1], _path[_currentLength]];
+        _pathDistance += antColony.graph.DistanceMatrix[_path[_currentLength - 2], _path[_currentLength - 1]];
             
         SetPheromone(antColony);
     }
 
     public bool IsPathValid(Graph graph)
     {
-        List<int> verts = graph.GetAdjacentVertices(_path[_currentLength]);
+        List<int> verts = graph.GetAdjacentVertices(_path[_currentLength - 1]);
         return _currentLength == Graph._amtOfVertices && verts.Contains(_path[0]);
     }
 }

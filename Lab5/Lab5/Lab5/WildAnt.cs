@@ -6,11 +6,10 @@ public class WildAnt : Ant
 
     public override void Traverse(AntColony antColony)
     {
-        List<int> adjacents = new List<int>() {0};
-        while (adjacents.Count > 0)
+        while (true)
         {
-            adjacents = GetAvailableVertices(antColony);
-            if (adjacents.Count == 0) return;
+            List<int> adjacents = GetAvailableVertices(antColony);
+            if (adjacents.Count == 0) break;
             Random rng = new Random();
             int chosenVertice = rng.Next(0, adjacents.Count);
 

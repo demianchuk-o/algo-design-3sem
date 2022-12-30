@@ -17,20 +17,16 @@ public class Graph
             }
             DistanceMatrix[k, k] = 0;
         }
-        int i = 0;
-        int j = 0;
+
         int weight = 0;
         StreamReader reader = new StreamReader(path);
-        string? line = reader.ReadLine();
-        while (line != null)
+        for (int i = 0; i < _amtOfVertices; i++)
         {
-            string[] split = line.Split(',');
-            i = Int32.Parse(split[0]);
-            weight = Int32.Parse(split[1]);
-            j = Int32.Parse(split[2]);
-            DistanceMatrix[i, j] = weight;
-            DistanceMatrix[j, i] = weight;
-            line = reader.ReadLine();
+            string[] line = reader.ReadLine().Split();
+            for (int j = 0; j < _amtOfVertices; j++)
+            {
+                DistanceMatrix[i,j] = Int32.Parse(line[j]);
+            }
         }
         reader.Dispose();
     }

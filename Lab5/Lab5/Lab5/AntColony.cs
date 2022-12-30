@@ -17,6 +17,7 @@ public class AntColony
     private double[,] _pheromonesMatrix;
     private int[] AllTimeBestPath;
     private int AllTimeBestDistance;
+    public static string filepath = "data.txt";
 
     public AntColony(Graph g, double a, double b, double r, int lm, bool placement, int elite, int reg, int wild)
     {
@@ -35,9 +36,11 @@ public class AntColony
         {
             for (int j = 0; j < Graph._amtOfVertices; j++)
             {
-                _pheromonesMatrix[i, j] = 0.1;
+                if(graph.DistanceMatrix[i,j]>0)
+                    _pheromonesMatrix[i, j] = 0.1;
+                else
+                    _pheromonesMatrix[i, i] = 0d;
             }
-            _pheromonesMatrix[i, i] = 0d;
         }
         
         AllTimeBestDistance = Int32.MaxValue;
@@ -50,7 +53,6 @@ public class AntColony
         int bestDistance;
         while (itr < iterations)
         {
-            Console.WriteLine(itr);
             itr++;
             CreateColony();
             PlaceAnts();
@@ -61,7 +63,6 @@ public class AntColony
             {
                 if (ant.IsPathValid(graph) && bestDistance > ant._pathDistance)
                 {
-                    Console.WriteLine("Found valid path");
                     bestDistance = ant._pathDistance;
                     bestPath = ant._path;
                 }
@@ -71,6 +72,7 @@ public class AntColony
             {
                 AllTimeBestDistance = bestDistance;
                 AllTimeBestPath = bestPath;
+                if(AllTimeBestDistance <= Lmin) return;
             }
             PlacePheromones();
             
@@ -152,9 +154,35 @@ public class AntColony
         }
     }
 
-    public void WriteBestPath()
+    public void WritePath()
     {
         for (int i = 0; i < AllTimeBestPath.Length; i++)
-            Console.WriteLine($"{AllTimeBestPath[i]} ");
+            Console.Write($"{AllTimeBestPath[i]} ");
+        Console.WriteLine($"\nwith a distance of {AllTimeBestDistance}");
+    }
+
+    public void SaveResults()
+    {
+        StreamWriter writer = new StreamWriter(AntColony.filepath, false);
+        string diffplace = this._differentPlacement ? "yes" : "no";
+        string message = $"Alpha: {_alpha}\nBeta: {_beta}\nRho: {_rho}\nL min: {Lmin}\nAnts:\n\tElite: {_elites}\n\tRegular: {_regs}\n\tWild: {_wilds}\nDifferent Placement: {diffplace}";
+        writer.Write(message);
+        message = "\nPheromones matrix:\n";
+        for (int i = 0; i < _pheromonesMatrix.GetLength(0); i++)
+        {
+            for (int j = 0; j < _pheromonesMatrix.GetLength(1); j++)
+                message += $"{_pheromonesMatrix[i, j]} ";
+            
+            message += "\n";
+        }
+        writer.Write(message);
+        message = "\nThe best path found:\n";
+        for (int i = 0; i < AllTimeBestPath.Length; i++)
+            message += $"{AllTimeBestPath[i]} ";
+
+        message += $"\nwith a distance of {AllTimeBestDistance}";
+        writer.Write(message);
+
+        writer.Dispose();
     }
 }

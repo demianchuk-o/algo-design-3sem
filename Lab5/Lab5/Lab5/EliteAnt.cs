@@ -6,9 +6,9 @@ public class EliteAnt : Ant
 
     public override void Traverse(AntColony antColony)
     {
-        List<int> adjacents = new List<int>() {0};
-        while (adjacents.Count > 0) {
-            adjacents = GetAvailableVertices(antColony);
+        while (true) 
+        {
+            List<int> adjacents = GetAvailableVertices(antColony);
             if (adjacents.Count == 0) return;
             double[] probabilites = antColony.GetChoiceProbs(_path[_currentLength - 1], adjacents);
 
