@@ -4,8 +4,6 @@ public class Graph
 {
     private static string path = "graph.txt";
     public static int _amtOfVertices = 300;
-    public static int _minDistance = 5;
-    public static int _maxDistance = 150;
     public int[,] DistanceMatrix { get; }
 
     public Graph()
@@ -45,15 +43,5 @@ public class Graph
 
         return adjacentVertices;
     }
-
-    public int GetCycleDistance(int[] cycle)
-    {
-        int distance = 0;
-        for (int i = 1; i <= cycle.Length; i++)
-        {
-            distance += DistanceMatrix[i - 1, i];
-        }
-
-        return distance;
-    }
+    
 }

@@ -2,14 +2,14 @@
 
 public class EliteAnt : Ant
 {
-    protected override int pheromoneCoeff => 2;
+    public override int pheromoneCoeff => 2;
 
-    protected override void Traverse(AntColony antColony)
+    public override void Traverse(AntColony antColony)
     {
-        while (_currentLength < Graph._amtOfVertices)
-        {
-            List<int> adjacents = GetAvailableVertices(antColony);
-
+        List<int> adjacents = new List<int>() {0};
+        while (adjacents.Count > 0) {
+            adjacents = GetAvailableVertices(antColony);
+            if (adjacents.Count == 0) return;
             double[] probabilites = antColony.GetChoiceProbs(_path[_currentLength - 1], adjacents);
 
             int chosenVertice = 0;
@@ -22,6 +22,6 @@ public class EliteAnt : Ant
             }
 
             MoveToVertice(antColony, adjacents, chosenVertice);
-        }
+        } 
     }
 }

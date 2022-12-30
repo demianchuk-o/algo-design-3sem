@@ -1,11 +1,13 @@
-﻿namespace Lab5;
+﻿using System.Net.Security;
+
+namespace Lab5;
 
 public abstract class Ant
 {
     public int[] _path { get; private set; }
-    protected int _currentLength;
-    protected int _pathDistance;
-    protected abstract int pheromoneCoeff { get; }
+    public int _currentLength;
+    public int _pathDistance;
+    public abstract int pheromoneCoeff { get; }
     public double[] pheromones { get; private set; }
 
     public Ant()
@@ -18,16 +20,16 @@ public abstract class Ant
 
     protected void SetPheromone(AntColony antColony)
     {
-        pheromones[_currentLength - 2] = (double)antColony._Lmin / _pathDistance;
+        pheromones[_currentLength - 2] = (double)antColony.Lmin / _pathDistance;
     }
 
-    protected void PlaceAtStart(int vertice)
+    public void PlaceAtStart(int vertice)
     {
         _path[0] = vertice;
         _currentLength++;
     }
     
-    protected abstract void Traverse(AntColony antColony);
+    public abstract void Traverse(AntColony antColony);
 
     protected List<int> GetAvailableVertices(AntColony antColony)
     {
@@ -43,5 +45,11 @@ public abstract class Ant
         _pathDistance += antColony.graph.DistanceMatrix[_path[_currentLength - 1], _path[_currentLength]];
             
         SetPheromone(antColony);
+    }
+
+    public bool IsPathValid(Graph graph)
+    {
+        List<int> verts = graph.GetAdjacentVertices(_path[_currentLength]);
+        return _currentLength == Graph._amtOfVertices && verts.Contains(_path[0]);
     }
 }
