@@ -15,10 +15,13 @@ public class EliteAnt : Ant
             int chosenVertice = 0;
             double maxProbability = 0d;
 
-            while (chosenVertice < probabilites.Length && maxProbability < probabilites[chosenVertice])
+            for (int i = 0; i < probabilites.Length; i++)
             {
-                maxProbability = probabilites[chosenVertice];
-                chosenVertice++;
+                if (maxProbability < probabilites[i])
+                {
+                    maxProbability = probabilites[i];
+                    chosenVertice = i;
+                }
             }
 
             MoveToVertice(antColony, adjacents, chosenVertice);
